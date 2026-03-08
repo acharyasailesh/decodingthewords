@@ -94,7 +94,7 @@ export default function WhoWeArePage() {
                                     </span>
                                 )}
                             </div>
-                            <h2 className="text-2xl font-heading font-bold mb-1">{author.name}</h2>
+                            <h2 className="text-2xl font-heading font-bold mb-1 text-white">{author.name}</h2>
                             <p className="text-white/60 text-sm font-medium mb-4">{author.experience} experience</p>
                             <div className="flex gap-3 mt-2">
                                 <a href={author.facebook} target="_blank" rel="noopener noreferrer"
