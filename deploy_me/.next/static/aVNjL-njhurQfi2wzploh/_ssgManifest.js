@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fadmin\u002Fchapters\u002F[chapterId]","\u002Fread\u002F[chapterId]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

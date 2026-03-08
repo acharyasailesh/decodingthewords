@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/admin/layout,_N_T_/admin/chapters/layout,_N_T_/admin/chapters/[chapterId]/layout,_N_T_/admin/chapters/[chapterId]/page,_N_T_/admin/chapters/ch-3"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/admin/chapters/$d$chapterId/__PAGE__",
+    "/admin/chapters/$d$chapterId",
+    "/admin/chapters",
+    "/admin",
+    "/_index",
+    "/_head"
+  ]
+}

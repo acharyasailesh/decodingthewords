@@ -1,0 +1,217 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/admin/chapters/[chapterId]",
+      "regex": "^/admin/chapters/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPchapterId": "nxtPchapterId"
+      },
+      "namedRegex": "^/admin/chapters/(?<nxtPchapterId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/read/[chapterId]",
+      "regex": "^/read/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPchapterId": "nxtPchapterId"
+      },
+      "namedRegex": "^/read/(?<nxtPchapterId>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/chapters",
+      "regex": "^/admin/chapters(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/chapters(?:/)?$"
+    },
+    {
+      "page": "/admin/chapters/edit",
+      "regex": "^/admin/chapters/edit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/chapters/edit(?:/)?$"
+    },
+    {
+      "page": "/admin/settings",
+      "regex": "^/admin/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/settings(?:/)?$"
+    },
+    {
+      "page": "/admin/submissions",
+      "regex": "^/admin/submissions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/submissions(?:/)?$"
+    },
+    {
+      "page": "/admin/testimonials",
+      "regex": "^/admin/testimonials(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/testimonials(?:/)?$"
+    },
+    {
+      "page": "/admin/users",
+      "regex": "^/admin/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/users(?:/)?$"
+    },
+    {
+      "page": "/api/admin/delete-entry",
+      "regex": "^/api/admin/delete\\-entry(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/delete\\-entry(?:/)?$"
+    },
+    {
+      "page": "/api/admin/invite-user",
+      "regex": "^/api/admin/invite\\-user(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/invite\\-user(?:/)?$"
+    },
+    {
+      "page": "/api/send-email",
+      "regex": "^/api/send\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/send\\-email(?:/)?$"
+    },
+    {
+      "page": "/buy",
+      "regex": "^/buy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/buy(?:/)?$"
+    },
+    {
+      "page": "/buy/success",
+      "regex": "^/buy/success(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/buy/success(?:/)?$"
+    },
+    {
+      "page": "/chapters-index",
+      "regex": "^/chapters\\-index(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/chapters\\-index(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/forgot-password",
+      "regex": "^/forgot\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/forgot\\-password(?:/)?$"
+    },
+    {
+      "page": "/framework",
+      "regex": "^/framework(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/framework(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
+    },
+    {
+      "page": "/read",
+      "regex": "^/read(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/read(?:/)?$"
+    },
+    {
+      "page": "/reset-password",
+      "regex": "^/reset\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/reset\\-password(?:/)?$"
+    },
+    {
+      "page": "/success-stories",
+      "regex": "^/success\\-stories(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/success\\-stories(?:/)?$"
+    },
+    {
+      "page": "/terms",
+      "regex": "^/terms(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/terms(?:/)?$"
+    },
+    {
+      "page": "/who-we-are",
+      "regex": "^/who\\-we\\-are(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/who\\-we\\-are(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

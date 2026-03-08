@@ -1,0 +1,51 @@
+name: Build & Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main   # Triggers on every push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build Next.js & Upload to cPanel
+
+    steps:
+      # 1. Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Create .env.local from GitHub Secrets
+      - name: Create .env file
+        run: |
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> .env.local
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env.local
+
+      # 5. Build the static export
+      - name: Build Next.js (Static Export)
+        run: npm run build
+
+      # 6. Upload the 'out/' folder to cPanel via FTP
+      - name: Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/
+          server-dir: /public_html/   # Change this to your subfolder if needed, e.g. /public_html/decodingthewords/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
