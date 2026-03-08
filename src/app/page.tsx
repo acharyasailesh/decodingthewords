@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import BookTrailer from "@/components/home/BookTrailer";
 import WordFramework from "@/components/home/WordFramework";
 import AuthorSection from "@/components/home/AuthorSection";
 import PricingSection from "@/components/home/PricingSection";
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-offwhite">
       <Hero />
+      <BookTrailer />
       <WordFramework />
       <AuthorSection />
       <PricingSection />

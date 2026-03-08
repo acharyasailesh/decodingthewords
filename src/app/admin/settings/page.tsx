@@ -29,6 +29,7 @@ type Settings = {
     author_image_path: string;
     author_details: AuthorDetails | null;
     book_sections: BookSection[] | null;
+    book_trailer_url?: string;
 };
 
 const DEFAULT_AUTHOR: AuthorDetails = {
@@ -44,6 +45,7 @@ const DEFAULT_AUTHOR: AuthorDetails = {
 };
 
 const DEFAULT_SECTIONS: BookSection[] = [
+    { id: "FRONT", titleEn: "Front Matter", titleNp: "प्रारम्भिक" },
     { id: "SECTION-1", titleEn: "Social Trap", titleNp: "सामाजिक जालो" },
     { id: "SECTION-2", titleEn: "The W-O-R-D Framework", titleNp: "W-O-R-D ढाँचा" },
     { id: "SECTION-3", titleEn: "Procrastination & Persistence", titleNp: "ढिलाइ र परिश्रम" },
@@ -71,6 +73,7 @@ const DEFAULT: Settings = {
     author_image_path: "",
     author_details: null,
     book_sections: null,
+    book_trailer_url: "",
 };
 
 const TABS = ["general", "marquee", "content", "coupons", "seo", "analytics", "social"] as const;
@@ -441,6 +444,17 @@ export default function AdminSettingsPage() {
                                             placeholder="+977..."
                                             className="w-full px-4 py-3 bg-offwhite border border-black/10 rounded-xl text-sm focus:border-gold outline-none"
                                         />
+                                    </div>
+                                    <div className="space-y-2 md:col-span-2">
+                                        <label className="text-sm font-bold text-navy">Book Trailer URL (YouTube/Vimeo)</label>
+                                        <input
+                                            type="text"
+                                            value={settings.book_trailer_url || ""}
+                                            onChange={(e) => set("book_trailer_url", e.target.value)}
+                                            placeholder="https://www.youtube.com/watch?v=..."
+                                            className="w-full px-4 py-3 bg-offwhite border border-black/10 rounded-xl text-sm focus:border-gold outline-none"
+                                        />
+                                        <p className="text-[10px] text-black/40 mt-1 italic">Paste the full URL of your book trailer video.</p>
                                     </div>
                                 </div>
 
