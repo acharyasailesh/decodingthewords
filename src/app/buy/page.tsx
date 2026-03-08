@@ -173,7 +173,14 @@ export default function BuyPage() {
                 console.error('[Email API fetch error]', err);
             });
 
-            // 4. Redirect to Success Page
+            // 4. Send WhatsApp copy to Admin (9846142530)
+            const whatsappMessage = `*New Payment Submission - Decoding the Words*%0A%0A*Name:* ${data.fullName}%0A*Phone:* ${data.phone}%0A*Email:* ${data.email}%0A*Reference:* ${referenceNumber}%0A*Message:* ${data.message || 'N/A'}`;
+            const whatsappUrl = `https://wa.me/9779846142530?text=${whatsappMessage}`;
+            
+            // We open in a new tab so they still stay on our success page
+            window.open(whatsappUrl, '_blank');
+
+            // 5. Redirect to Success Page
             router.push(`/buy/success?ref=${referenceNumber}`);
 
 
