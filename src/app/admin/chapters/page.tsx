@@ -160,68 +160,104 @@ export default function AdminChaptersPage() {
                 </div>
             ) : (
                 <div className="space-y-5">
-                    {Object.entries(grouped).map(([sectionId, group]) => (
-                        <div key={sectionId} className="bg-white rounded-2xl border border-black/5 shadow-sm overflow-hidden">
-                            {/* Section Header */}
+                    {/* Use the sections order from settings to render groups */}
+                    {Object.keys(sections).map((sectionId) => {
+                        const group = grouped[sectionId];
+                        if (!group) return null; // Skip sections with no chapters
+                        
+                        return (
+                            <div key={sectionId} className="bg-white rounded-2xl border border-black/5 shadow-sm overflow-hidden">
+                                {/* Section Header */}
+                                <div
+                                    onClick={() => setCollapsed((c) => ({ ...c, [sectionId]: !c[sectionId] }))}
+                                    className="flex items-center justify-between px-6 py-4 bg-navy cursor-pointer"
+                                >
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-widest text-gold mb-0.5">{sectionId}</p>
+                                        <h3 className="text-white font-heading font-bold">{group.englishTitle}</h3>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <span className="text-white/40 text-sm font-medium">{group.chapters.length} chapter{group.chapters.length !== 1 ? "s" : ""}</span>
+                                        {collapsed[sectionId] ? <ChevronDown className="w-5 h-5 text-white/50" /> : <ChevronUp className="w-5 h-5 text-white/50" />}
+                                    </div>
+                                </div>
+
+                                {!collapsed[sectionId] && (
+                                    <ul className="divide-y divide-black/5">
+                                        {group.chapters.map((ch) => (
+                                            <li key={ch.id} className="flex items-center gap-4 px-6 py-4 hover:bg-[#F4F5F9]/50 transition-colors">
+                                                <GripVertical className="w-4 h-4 text-black/20 shrink-0 cursor-grab" />
+
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="font-bold text-navy text-sm truncate">{ch.title_english}</p>
+                                                    <p className="text-xs font-nepali text-black/50 mt-0.5 truncate">{ch.title_nepali}</p>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 shrink-0">
+                                                    {/* Preview Toggle */}
+                                                    <button
+                                                        onClick={() => togglePreview(ch.id, ch.is_preview)}
+                                                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${ch.is_preview
+                                                            ? "bg-green-100 text-green-700 hover:bg-green-200"
+                                                            : "bg-black/5 text-black/40 hover:bg-black/10"
+                                                            }`}
+                                                    >
+                                                        {ch.is_preview ? "Preview ✓" : "Preview Off"}
+                                                    </button>
+
+                                                    <Link
+                                                        href={`/admin/chapters/edit?id=${ch.id}`}
+                                                        className="flex items-center gap-1.5 text-xs font-bold text-navy bg-offwhite px-3 py-1.5 rounded-lg hover:bg-gold/10 hover:text-gold transition-colors border border-black/10"
+                                                    >
+                                                        <Edit2 className="w-3.5 h-3.5" /> Edit
+                                                    </Link>
+
+                                                    <button
+                                                        onClick={() => handleDelete(ch.id, ch.title_english)}
+                                                        disabled={deletingId === ch.id}
+                                                        className="flex items-center gap-1.5 text-xs font-bold text-red-500 bg-red-50 px-3 py-1.5 rounded-lg hover:bg-red-100 transition-colors border border-red-100"
+                                                    >
+                                                        {deletingId === ch.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        );
+                    })}
+
+                    {/* Handle Orphan chapters (not in settings) */}
+                    {grouped["ORPHAN"] && (
+                        <div key="ORPHAN" className="bg-white rounded-2xl border border-black/5 shadow-sm overflow-hidden">
                             <div
-                                onClick={() => setCollapsed((c) => ({ ...c, [sectionId]: !c[sectionId] }))}
-                                className="flex items-center justify-between px-6 py-4 bg-navy cursor-pointer"
+                                onClick={() => setCollapsed((c) => ({ ...c, ORPHAN: !c.ORPHAN }))}
+                                className="flex items-center justify-between px-6 py-4 bg-gray-500 cursor-pointer"
                             >
                                 <div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-gold mb-0.5">{sectionId}</p>
-                                    <h3 className="text-white font-heading font-bold">{group.englishTitle}</h3>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-0.5">ORPHAN</p>
+                                    <h3 className="text-white font-heading font-bold">Uncategorized Chapters</h3>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-white/40 text-sm font-medium">{group.chapters.length} chapter{group.chapters.length !== 1 ? "s" : ""}</span>
-                                    {collapsed[sectionId] ? <ChevronDown className="w-5 h-5 text-white/50" /> : <ChevronUp className="w-5 h-5 text-white/50" />}
+                                    {collapsed["ORPHAN"] ? <ChevronDown className="w-5 h-5 text-white/50" /> : <ChevronUp className="w-5 h-5 text-white/50" />}
                                 </div>
                             </div>
-
-                            {!collapsed[sectionId] && (
+                            {!collapsed["ORPHAN"] && (
                                 <ul className="divide-y divide-black/5">
-                                    {group.chapters.map((ch) => (
+                                    {grouped["ORPHAN"].chapters.map((ch) => (
                                         <li key={ch.id} className="flex items-center gap-4 px-6 py-4 hover:bg-[#F4F5F9]/50 transition-colors">
-                                            <GripVertical className="w-4 h-4 text-black/20 shrink-0 cursor-grab" />
-
-                                            <div className="flex-1 min-w-0">
+                                            <div className="flex-1 min-w-0 ml-8">
                                                 <p className="font-bold text-navy text-sm truncate">{ch.title_english}</p>
-                                                <p className="text-xs font-nepali text-black/50 mt-0.5 truncate">{ch.title_nepali}</p>
                                             </div>
-
-                                            <div className="flex items-center gap-3 shrink-0">
-                                                {/* Preview Toggle */}
-                                                <button
-                                                    onClick={() => togglePreview(ch.id, ch.is_preview)}
-                                                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${ch.is_preview
-                                                        ? "bg-green-100 text-green-700 hover:bg-green-200"
-                                                        : "bg-black/5 text-black/40 hover:bg-black/10"
-                                                        }`}
-                                                >
-                                                    {ch.is_preview ? "Preview ✓" : "Preview Off"}
-                                                </button>
-
-                                                <Link
-                                                    href={`/admin/chapters/edit?id=${ch.id}`}
-                                                    className="flex items-center gap-1.5 text-xs font-bold text-navy bg-offwhite px-3 py-1.5 rounded-lg hover:bg-gold/10 hover:text-gold transition-colors border border-black/10"
-                                                >
-                                                    <Edit2 className="w-3.5 h-3.5" /> Edit
-                                                </Link>
-
-                                                <button
-                                                    onClick={() => handleDelete(ch.id, ch.title_english)}
-                                                    disabled={deletingId === ch.id}
-                                                    className="flex items-center gap-1.5 text-xs font-bold text-red-500 bg-red-50 px-3 py-1.5 rounded-lg hover:bg-red-100 transition-colors border border-red-100"
-                                                >
-                                                    {deletingId === ch.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
-                                                    Delete
-                                                </button>
-                                            </div>
+                                            <Link href={`/admin/chapters/edit?id=${ch.id}`} className="text-xs font-bold text-navy bg-offwhite px-3 py-1.5 rounded-lg border border-black/10">Edit</Link>
                                         </li>
                                     ))}
                                 </ul>
                             )}
                         </div>
-                    ))}
+                    )}
                 </div>
             )}
         </div>
