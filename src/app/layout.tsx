@@ -42,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ne">
+    <html lang="ne" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${playfair.variable} ${hindiFont.variable} font-sans antialiased bg-offwhite text-navy`}
       >

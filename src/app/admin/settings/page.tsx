@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { Save, Loader2, Upload, Plus, Trash2, GripVertical } from "lucide-react";
+import { Save, Loader2, Upload, Plus, Trash2, GripVertical, Star } from "lucide-react";
 
 type BookSection = { id: string; titleEn: string; titleNp: string };
 type AuthorRole = { text: string; link: string };
