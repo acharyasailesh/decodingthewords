@@ -13,12 +13,14 @@ import {
     InboxIcon,
     Star,
     Library,
-    Database
+    Database,
+    Globe
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
 const navItems = [
+    { href: "/", label: "View Website", icon: Globe },
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/chapters", label: "Book Content", icon: BookOpen },
     { href: "/admin/submissions", label: "Submissions", icon: InboxIcon },
