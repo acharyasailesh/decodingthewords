@@ -68,7 +68,7 @@ export default function WhoWeArePage() {
     }
 
     return (
-        <div className="min-h-screen bg-offwhite py-28">
+        <div className="min-h-screen bg-offwhite pt-40 pb-24">
             <div className="container mx-auto px-6 max-w-4xl">
 
                 {/* Hero */}

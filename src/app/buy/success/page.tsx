@@ -70,7 +70,7 @@ function SuccessContent() {
 
 export default function BuySuccessPage() {
     return (
-        <div className="min-h-screen bg-offwhite py-32 flex items-center justify-center px-6">
+        <div className="min-h-screen bg-offwhite pt-44 pb-32 flex items-center justify-center px-6">
             <Suspense fallback={<div className="text-center font-bold text-navy animate-pulse">Loading Receipt...</div>}>
                 <SuccessContent />
             </Suspense>

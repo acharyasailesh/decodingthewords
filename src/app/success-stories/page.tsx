@@ -79,7 +79,7 @@ export default async function SuccessStories() {
         : fallbackTestimonials;
 
     return (
-        <div className="min-h-screen bg-offwhite py-28">
+        <div className="min-h-screen bg-offwhite pt-40 pb-24">
             <div className="container mx-auto px-6 max-w-6xl">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-heading font-bold text-navy mb-4">

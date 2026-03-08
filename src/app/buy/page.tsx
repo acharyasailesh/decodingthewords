@@ -196,7 +196,7 @@ export default function BuyPage() {
     };
 
     return (
-        <div className="min-h-screen bg-offwhite py-32">
+        <div className="min-h-screen bg-offwhite pt-40 pb-24">
             <div className="container mx-auto px-6 max-w-5xl">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-heading font-bold text-navy mb-4">
