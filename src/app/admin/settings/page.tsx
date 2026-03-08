@@ -405,16 +405,19 @@ export default function AdminSettingsPage() {
                     <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl">
                         <p className="text-sm font-bold text-red-700">⚠️ Save failed:</p>
                         <p className="text-sm text-red-600 mt-1 font-mono">{saveError}</p>
-                        {saveError.includes("column") && (
-                            <p className="text-sm text-red-700 mt-2 font-semibold">
-                                👉 Please run the SQL migration first! Open Supabase → SQL Editor → run <code className="bg-red-100 px-1 rounded">dynamic_sections_update.sql</code>
-                            </p>
-                        )}
-                        {saveError.toLowerCase().includes("upload") && (
+                        {saveError.includes("column") || saveError.includes("book_trailer_url") ? (
+                            <div className="mt-3 p-3 bg-red-100/50 rounded-lg">
+                                <p className="text-xs text-red-700 font-bold uppercase tracking-wider mb-2">⚡ Action Required: Update Database</p>
+                                <p className="text-sm text-red-700 mb-2 font-medium">Please run this SQL in your Supabase SQL Editor to enable the new features:</p>
+                                <code className="block bg-white p-3 rounded border border-red-200 text-[10px] text-navy font-mono break-all">
+                                    ALTER TABLE settings ADD COLUMN IF NOT EXISTS book_trailer_url TEXT;
+                                </code>
+                            </div>
+                        ) : saveError.toLowerCase().includes("upload") ? (
                             <p className="text-sm text-red-700 mt-2 font-semibold">
                                 👉 Storage Permissions Issue! Open Supabase → SQL Editor → run the contents of <code className="bg-red-100 px-1 rounded">fix_storage_permissions.sql</code>
                             </p>
-                        )}
+                        ) : null}
                     </div>
                 )}
 
@@ -766,13 +769,26 @@ export default function AdminSettingsPage() {
                                             These sections group chapters in the reader and the Chapters Index page.
                                         </p>
                                     </div>
-                                    <button
-                                        type="button"
-                                        onClick={addSection}
-                                        className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-navy bg-offwhite border border-black/10 rounded-xl hover:border-gold transition-colors"
-                                    >
-                                        <Plus className="w-3.5 h-3.5" /> Add Section
-                                    </button>
+                                    <div className="flex gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                if (!sections.some(s => s.id === 'FRONT')) {
+                                                    setSections([{ id: "FRONT", titleEn: "Front Matter", titleNp: "प्रारम्भिक" }, ...sections]);
+                                                }
+                                            }}
+                                            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-gold bg-gold/5 border border-gold/20 rounded-xl hover:bg-gold/10 transition-colors"
+                                        >
+                                            <Star className="w-3.5 h-3.5" /> Start with Front Matter
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={addSection}
+                                            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-navy bg-offwhite border border-black/10 rounded-xl hover:border-gold transition-colors"
+                                        >
+                                            <Plus className="w-3.5 h-3.5" /> Add Section
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="space-y-3">
